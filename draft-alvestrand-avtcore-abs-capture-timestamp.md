@@ -19,8 +19,8 @@
 # Change the file extension to match the format (.xml for XML, etc...)
 #
 ###
-title: "TODO - Your title"
-abbrev: "TODO - Abbreviation"
+title: "Absolute Capture Timestamp RTP header extension"
+abbrev: "Abs capture timestamp"
 category: info
 
 docname: draft-todo-yourname-protocol-latest
