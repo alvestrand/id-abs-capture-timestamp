@@ -68,11 +68,9 @@ mixers) are involved.
 <http://www.webrtc.org/experiments/rtp-hdrext/abs-capture-time>
 
 **Status:**
-This extension is defined here to allow for experimentation. Once experience has
-shown that it is useful, we intend to make a proposal based on it for
-standardization in the IETF.
-
-Contact <chxg@google.com> for more info.
+This extension is defined here to allow for experimentation. Experience with the experiment has shown that it is useful; this draft therefore presents it to the
+IETF for consideration of whether to standardize it or leave it as a proprietary
+extension.
 
 ## RTP header extension format
 
@@ -196,4 +194,5 @@ identify the extension.
 # Acknowledgments
 {:numbered="false"}
 
-TODO acknowledge.
+Chen Xing, for writing the original version of this specification.
+
