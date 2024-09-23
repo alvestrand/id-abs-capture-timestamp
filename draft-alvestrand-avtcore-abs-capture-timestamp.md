@@ -9,19 +9,19 @@ number:
 date:
 consensus: true
 v: 3
-area: AREA
-workgroup: WG Working Group
+area: "Web and Internet Transport"
+workgroup: "Audio/Video Transport Core Maintenance"
 keyword:
  - next generation
  - unicorn
  - sparkling distributed ledger
 venue:
-  group: WG
-  type: Working Group
-  mail: WG@example.com
-  arch: https://example.com/WG
-  github: USER/REPO
-  latest: https://example.com/LATEST
+  group: "Audio/Video Transport Core Maintenance"
+  type: "Working Group"
+  mail: "avt@ietf.org"
+  arch: "https://mailarchive.ietf.org/arch/browse/avt/"
+  github: "alvestrand/id-abs-capture-timestamp"
+  latest: "https://alvestrand.github.io/id-abs-capture-timestamp/draft-alvestrand-avtcore-abs-capture-timestamp.html"
 
 author:
  -
