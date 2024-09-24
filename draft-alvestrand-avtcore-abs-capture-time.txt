@@ -4,12 +4,12 @@
 
 Audio/Video Transport Core Maintenance                     H. Alvestrand
 Internet-Draft                                                    Google
-Intended status: Informational                         23 September 2024
-Expires: 27 March 2025
+Intended status: Informational                         24 September 2024
+Expires: 28 March 2025
 
 
             Absolute Capture Timestamp RTP header extension
-         draft-alvestrand-avtcore-abs-capture-timestamp-latest
+            draft-alvestrand-avtcore-abs-capture-time-latest
 
 Abstract
 
@@ -27,7 +27,7 @@ About This Document
    https://alvestrand.github.io/id-abs-capture-timestamp/draft-
    alvestrand-avtcore-abs-capture-timestamp.html.  Status information
    for this document may be found at https://datatracker.ietf.org/doc/
-   draft-alvestrand-avtcore-abs-capture-timestamp/.
+   draft-alvestrand-avtcore-abs-capture-time/.
 
    Discussion of this document takes place on the Audio/Video Transport
    Core Maintenance Working Group mailing list (mailto:avt@ietf.org),
@@ -52,7 +52,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 27 March 2025.
+   This Internet-Draft will expire on 28 March 2025.
 
 Copyright Notice
 
