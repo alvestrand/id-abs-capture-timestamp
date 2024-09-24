@@ -3,7 +3,7 @@ title: "Absolute Capture Timestamp RTP header extension"
 abbrev: "Abs capture timestamp"
 category: info
 
-docname: draft-alvestrand-avtcore-abs-capture-timestamp-latest
+docname: draft-alvestrand-avtcore-abs-capture-time-latest
 submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
 number:
 date:
