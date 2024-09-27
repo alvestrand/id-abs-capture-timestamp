@@ -26,7 +26,7 @@ venue:
 author:
  -
     fullname: "Harald Alvestrand"
-    organization: Google
+    organization: "Google"
     email: "hta@google.com"
 
 normative:
@@ -132,10 +132,10 @@ as the system that owns the NTP clock used to generate the NTP timestamps for
 the RTCP sender reports on this stream. The sender system is typically either
 the capture system or a mixer.
 
-This field is encoded as a 64-bit two’s complement **signed** fixed-point number
+This field is encoded as a 64-bit two's complement **signed** fixed-point number
 with the high 32 bits for the seconds and low 32 bits for the fractional part.
-It’s intended to make it easy for a receiver, that knows how to estimate the
-sender system’s NTP clock, to also estimate the capture system’s NTP clock:
+It's intended to make it easy for a receiver, that knows how to estimate the
+sender system's NTP clock, to also estimate the capture system's NTP clock:
 
      Capture NTP Clock = Sender NTP Clock + Capture Clock Offset
 
@@ -146,7 +146,7 @@ sender system’s NTP clock, to also estimate the capture system’s NTP clock:
 A receiver MUST treat the first CSRC in the CSRC list of a received packet as if
 it belongs to the capture system. If the CSRC list is empty, then the receiver
 MUST treat the SSRC as if it belongs to the capture system. Mixers SHOULD put
-the most prominent CSRC as the first CSRC in a packet’s CSRC list.
+the most prominent CSRC as the first CSRC in a packet's CSRC list.
 
 #### Intermediate systems
 
@@ -168,7 +168,7 @@ packet on each received stream. It can then use that information, in combination
 with RTP timestamps of packets without `abs-capture-time`, to extrapolate
 missing capture timestamps.
 
-Timestamp interpolation works fine as long as there’s reasonably low NTP/RTP
+Timestamp interpolation works fine as long as there's reasonably low NTP/RTP
 clock drift. This is not always true. Senders that detect "jumps" between its
 NTP and RTP clock mappings SHOULD send `abs-capture-time` with the first RTP
 packet after such a thing happening.
@@ -195,4 +195,3 @@ identify the extension.
 {:numbered="false"}
 
 Chen Xing, for writing the original version of this specification.
-
