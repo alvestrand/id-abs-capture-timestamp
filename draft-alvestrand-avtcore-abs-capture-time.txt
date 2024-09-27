@@ -4,8 +4,8 @@
 
 Audio/Video Transport Core Maintenance                     H. Alvestrand
 Internet-Draft                                                    Google
-Intended status: Informational                         24 September 2024
-Expires: 28 March 2025
+Intended status: Informational                         27 September 2024
+Expires: 31 March 2025
 
 
             Absolute Capture Timestamp RTP header extension
@@ -52,7 +52,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 March 2025.
+   This Internet-Draft will expire on 31 March 2025.
 
 Copyright Notice
 
@@ -181,11 +181,11 @@ Table of Contents
    stream.  The sender system is typically either the capture system or
    a mixer.
 
-   This field is encoded as a 64-bit two’s complement *signed* fixed-
+   This field is encoded as a 64-bit two's complement *signed* fixed-
    point number with the high 32 bits for the seconds and low 32 bits
-   for the fractional part.  It’s intended to make it easy for a
-   receiver, that knows how to estimate the sender system’s NTP clock,
-   to also estimate the capture system’s NTP clock:
+   for the fractional part.  It's intended to make it easy for a
+   receiver, that knows how to estimate the sender system's NTP clock,
+   to also estimate the capture system's NTP clock:
 
     Capture NTP Clock = Sender NTP Clock + Capture Clock Offset
 
@@ -197,7 +197,7 @@ Table of Contents
    packet as if it belongs to the capture system.  If the CSRC list is
    empty, then the receiver MUST treat the SSRC as if it belongs to the
    capture system.  Mixers SHOULD put the most prominent CSRC as the
-   first CSRC in a packet’s CSRC list.
+   first CSRC in a packet's CSRC list.
 
 3.1.3.2.  Intermediate systems
 
@@ -220,7 +220,7 @@ Table of Contents
    that information, in combination with RTP timestamps of packets
    without abs-capture-time, to extrapolate missing capture timestamps.
 
-   Timestamp interpolation works fine as long as there’s reasonably low
+   Timestamp interpolation works fine as long as there's reasonably low
    NTP/RTP clock drift.  This is not always true.  Senders that detect
    "jumps" between its NTP and RTP clock mappings SHOULD send abs-
    capture-time with the first RTP packet after such a thing happening.
