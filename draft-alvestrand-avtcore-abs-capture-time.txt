@@ -226,14 +226,8 @@ Table of Contents
    *  Start with the "estimated capture clock offset" from the incoming
       packet
 
-   *  Add half the estimated round trip time between the sender and the
-      intermediate system
-
-   *  Add the time between the arrival of the packet and the queueing of
-      the packet for transmission
-
-   *  Add the estimated time that will be spent before the packet will
-      be sent
+   *  Add the estimated offset between the sender's NTP clock and the
+      intermediate's NTP clock (see Section 3.1.3.4)
 
    This should give a reasonable estimate of the offset between the
    capture system's clock and the NTP timestamps sent in SR blocks by
@@ -258,7 +252,21 @@ Table of Contents
    capture system.  Mixers SHOULD put the most prominent CSRC as the
    first CSRC in a packet's CSRC list.
 
-3.1.3.4.  Timestamp interpolation
+3.1.3.4.  Estimating the NTP clock offset
+
+   The NTP clock offset can be calculated from an SR packet in the
+   following way:
+
+   *  Take the arrival time of an SR packet, in the receiver's NTP clock
+
+   *  Subtract the NTP timestamp from the SR packet
+
+   *  Add half the estimated RTT between the sender and the receiver
+
+   The resulting number should be a reasonable approximation of the
+   offset between the two clocks.
+
+3.1.3.5.  Timestamp interpolation
 
    A sender SHOULD save bandwidth by not sending abs-capture-time with
    every RTP packet.  It SHOULD still send them at regular intervals
