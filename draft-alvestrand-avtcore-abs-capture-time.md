@@ -30,13 +30,16 @@ author:
     email: "hta@google.com"
 
 normative:
+  RFC2119:
+  RFC3550:
+  RFC8174:
 
 informative:
 
 
 --- abstract
 
-This document describes an RTP header extension that can be use to carry information
+This document describes an RTP header extension that can be used to carry information
 about the capture time of a video frame / audio sample, and include information that
 allows the capture time to be estimated by the receiver when the frame may have passed
 over multiple hops before reaching the receiver.
@@ -46,7 +49,19 @@ over multiple hops before reaching the receiver.
 
 # Introduction
 
-TODO Introduction
+When dealing with separate media streams originating from a single source, it is often
+desirable to present these in such a fashion that media generated at the same time is presented
+at the same time; the most well known form of this (between an audio stream and a video stream)
+is called "lip-sync".
+
+In a simple setup with one source system, a single network hop and one destination system, this
+is usually done by lining up RTP timestamps. However, when multiple hops and multiple systems
+are involved, this task becomes more difficult; in particular, when one desires to sychronize
+media from multiple sources with independent clocks, where the media may have travelled over
+multiple network hops between the source and destination.
+
+This memo describes one mechanism for providing more information to make such synchronization
+possible.
 
 
 # Conventions and Definitions
@@ -106,6 +121,7 @@ Data layout of the extended version of `abs-capture-time` with a 1-byte header +
      +-+-+-+-+-+-+-+-+
 
 ### Data layout details
+
 #### Absolute capture timestamp
 
 Absolute capture timestamp is the NTP timestamp of when the first frame in a
@@ -143,17 +159,45 @@ sender system's NTP clock, to also estimate the capture system's NTP clock:
 
 #### Capture system
 
-A receiver MUST treat the first CSRC in the CSRC list of a received packet as if
-it belongs to the capture system. If the CSRC list is empty, then the receiver
-MUST treat the SSRC as if it belongs to the capture system. Mixers SHOULD put
-the most prominent CSRC as the first CSRC in a packet's CSRC list.
+The capture system generates the timestamp as close as possible to the true
+capture time. This may involve subtracting known delays in the capture pipeline
+from the time at which the system clock is read.
+
+The capture time SHOULD be from the same clock as used to generate the NTP timestamp
+in RTP Sender Reports (SR) ([RFC3550] section 6.4.1); if this is not possible,
+the "estimated capture clock offset" MUST be used to indicate the offset between
+the clock used for the capture timestamp and the clock used for RTP Sender Reports.
+
 
 #### Intermediate systems
+
+An intermediate system MAY compute the outgoing capture clock offset as follows:
+
+- Start with the "estimated capture clock offset" from the incoming packet
+- Add half the estimated round trip time between the sender and the intermediate system
+- Add the time between the arrival of the packet and the queueing of the packet for transmission
+- Add the estimated time that will be spent before the packet will be sent
+
+This should give a reasonable estimate of the offset between the capture system's
+clock and the NTP timestamps sent in SR blocks by the intermediate system.
 
 An intermediate system (e.g. mixer) MAY adjust these timestamps as needed. It
 MAY also choose to rewrite the timestamps completely, using its own NTP clock as
 reference clock, if it wants to present itself as a capture system for A/V-sync
 purposes.
+
+#### End systems
+
+A receiver can use the same algorithm as intermediate systems in order to compute
+the approximate time in the receiver's NTP clock at which the packet was generated.
+This should be more comparable between source systems with different clocks than just using
+the raw timestamp.
+
+A receiver MUST treat the first CSRC in the CSRC list of a received packet as if
+it belongs to the capture system. If the CSRC list is empty, then the receiver
+MUST treat the SSRC as if it belongs to the capture system. Mixers SHOULD put
+the most prominent CSRC as the first CSRC in a packet's CSRC list.
+
 
 #### Timestamp interpolation
 
