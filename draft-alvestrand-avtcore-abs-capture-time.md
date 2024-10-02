@@ -174,9 +174,8 @@ the clock used for the capture timestamp and the clock used for RTP Sender Repor
 An intermediate system MAY compute the outgoing capture clock offset as follows:
 
 - Start with the "estimated capture clock offset" from the incoming packet
-- Add half the estimated round trip time between the sender and the intermediate system
-- Add the time between the arrival of the packet and the queueing of the packet for transmission
-- Add the estimated time that will be spent before the packet will be sent
+- Add the estimated offset between the sender's NTP clock and the intermediate's NTP clock
+(see [](#offset))
 
 This should give a reasonable estimate of the offset between the capture system's
 clock and the NTP timestamps sent in SR blocks by the intermediate system.
@@ -197,6 +196,17 @@ A receiver MUST treat the first CSRC in the CSRC list of a received packet as if
 it belongs to the capture system. If the CSRC list is empty, then the receiver
 MUST treat the SSRC as if it belongs to the capture system. Mixers SHOULD put
 the most prominent CSRC as the first CSRC in a packet's CSRC list.
+
+#### Estimating the NTP clock offset {#offset}
+
+The NTP clock offset can be calculated from an SR packet in the following way:
+
+- Take the arrival time of an SR packet, in the receiver's NTP clock
+- Subtract the NTP timestamp from the SR packet
+- Add half the estimated RTT between the sender and the receiver
+
+The resulting number should be a reasonable approximation of the offset between the
+two clocks.
 
 
 #### Timestamp interpolation
