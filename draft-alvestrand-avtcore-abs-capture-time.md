@@ -209,6 +209,13 @@ The resulting number should be a reasonable approximation of the offset between 
 two clocks, with positive numbers indicating that the sender's clock is running ahead,
 and negative numbers indicate that the sender's clock is running behind.
 
+Note that this method is sensitive to a number of issues:
+
+- Clock drift means that you have to continuously monitor and update the offset
+- RTT variance will cause variation in offset; a smoothed value should be used
+- Before an RTT estimate is available, some heuristic number is needed
+
+This document is not normative about how the NTP clock offset is estimated.
 
 #### Timestamp interpolation
 
