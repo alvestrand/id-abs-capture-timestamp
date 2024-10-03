@@ -56,8 +56,8 @@ is called "lip-sync".
 
 In a simple setup with one source system, a single network hop and one destination system, this
 is usually done by lining up RTP timestamps. However, when multiple hops and multiple systems
-are involved, this task becomes more difficult; in particular, when one desires to sychronize
-media from multiple sources with independent clocks, where the media may have travelled over
+are involved, this task becomes more difficult; in particular, when one desires to synchronize
+media from multiple sources with independent clocks, where the media may have traveled over
 multiple network hops between the source and destination.
 
 This memo describes one mechanism for providing more information to make such synchronization
