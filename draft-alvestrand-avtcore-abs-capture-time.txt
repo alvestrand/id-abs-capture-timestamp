@@ -204,6 +204,10 @@ Table of Contents
 
     Capture NTP Clock = Sender NTP Clock + Capture Clock Offset
 
+   If the estimated capture clock offset is not present (short format),
+   it means that the sending system does not have enough data to compute
+   a clock offset.
+
 3.1.3.  Further details
 
 3.1.3.1.  Capture system
@@ -214,8 +218,9 @@ Table of Contents
 
    The capture time SHOULD be from the same clock as used to generate
    the NTP timestamp in RTP Sender Reports (SR) ([RFC3550] section
-   6.4.1); if this is not possible, the "estimated capture clock offset"
-   MUST be used to indicate the offset between the clock used for the
+   6.4.1), and indicate this by setting the "estimated capture clock
+   offset" to zero; if this is not possible, the "estimated capture
+   clock offset" MUST indicate the offset between the clock used for the
    capture timestamp and the clock used for RTP Sender Reports.
 
 3.1.3.2.  Intermediate systems
@@ -276,9 +281,6 @@ Table of Contents
 
    *  RTT variance will cause variation in offset; a smoothed value
       should be used
-
-   *  Before an RTT estimate is available, some heuristic number is
-      needed
 
    This document is not normative about how the NTP clock offset is
    estimated.

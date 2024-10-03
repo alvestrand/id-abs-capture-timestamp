@@ -1314,6 +1314,8 @@ sender system's NTP clock, to also estimate the capture system's NTP clock:<a hr
  Capture NTP Clock = Sender NTP Clock + Capture Clock Offset
 </pre><a href="#section-3.1.2.2-3" class="pilcrow">¶</a>
 </div>
+<p id="section-3.1.2.2-4">If the estimated capture clock offset is not present (short format), it means
+that the sending system does not have enough data to compute a clock offset.<a href="#section-3.1.2.2-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1332,8 +1334,9 @@ sender system's NTP clock, to also estimate the capture system's NTP clock:<a hr
 capture time. This may involve subtracting known delays in the capture pipeline
 from the time at which the system clock is read.<a href="#section-3.1.3.1-1" class="pilcrow">¶</a></p>
 <p id="section-3.1.3.1-2">The capture time <span class="bcp14">SHOULD</span> be from the same clock as used to generate the NTP timestamp
-in RTP Sender Reports (SR) (<span>[<a href="#RFC3550" class="cite xref">RFC3550</a>]</span> section 6.4.1); if this is not possible,
-the "estimated capture clock offset" <span class="bcp14">MUST</span> be used to indicate the offset between
+in RTP Sender Reports (SR) (<span>[<a href="#RFC3550" class="cite xref">RFC3550</a>]</span> section 6.4.1), and indicate this by setting
+the "estimated capture clock offset" to zero; if this is not possible,
+the "estimated capture clock offset" <span class="bcp14">MUST</span> indicate the offset between
 the clock used for the capture timestamp and the clock used for RTP Sender Reports.<a href="#section-3.1.3.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1402,9 +1405,6 @@ and negative numbers indicate that the sender's clock is running behind.<a href=
 </li>
               <li class="normal" id="section-3.1.3.4-5.2">
                 <p id="section-3.1.3.4-5.2.1">RTT variance will cause variation in offset; a smoothed value should be used<a href="#section-3.1.3.4-5.2.1" class="pilcrow">¶</a></p>
-</li>
-              <li class="normal" id="section-3.1.3.4-5.3">
-                <p id="section-3.1.3.4-5.3.1">Before an RTT estimate is available, some heuristic number is needed<a href="#section-3.1.3.4-5.3.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 <p id="section-3.1.3.4-6">This document is not normative about how the NTP clock offset is estimated.<a href="#section-3.1.3.4-6" class="pilcrow">¶</a></p>
