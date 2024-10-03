@@ -4,8 +4,8 @@
 
 Audio/Video Transport Core Maintenance                     H. Alvestrand
 Internet-Draft                                                    Google
-Intended status: Informational                            2 October 2024
-Expires: 5 April 2025
+Intended status: Informational                            3 October 2024
+Expires: 6 April 2025
 
 
             Absolute Capture Timestamp RTP header extension
@@ -52,7 +52,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 5 April 2025.
+   This Internet-Draft will expire on 6 April 2025.
 
 Copyright Notice
 
@@ -257,14 +257,17 @@ Table of Contents
    The NTP clock offset can be calculated from an SR packet in the
    following way:
 
-   *  Take the arrival time of an SR packet, in the receiver's NTP clock
+   *  Take the NTP timestamp from the SR packet
 
-   *  Subtract the NTP timestamp from the SR packet
+   *  Subtract the arrival time of the SR packet, in the receiver's NTP
+      clock
 
    *  Add half the estimated RTT between the sender and the receiver
 
    The resulting number should be a reasonable approximation of the
-   offset between the two clocks.
+   offset between the two clocks, with positive numbers indicating that
+   the sender's clock is running ahead, and negative numbers indicate
+   that the sender's clock is running behind.
 
 3.1.3.5.  Timestamp interpolation
 
