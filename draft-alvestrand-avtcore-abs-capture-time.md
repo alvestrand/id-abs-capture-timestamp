@@ -155,6 +155,9 @@ sender system's NTP clock, to also estimate the capture system's NTP clock:
 
      Capture NTP Clock = Sender NTP Clock + Capture Clock Offset
 
+If the estimated capture clock offset is not present (short format), it means
+that the sending system does not have enough data to compute a clock offset.
+
 ### Further details
 
 #### Capture system
@@ -164,8 +167,9 @@ capture time. This may involve subtracting known delays in the capture pipeline
 from the time at which the system clock is read.
 
 The capture time SHOULD be from the same clock as used to generate the NTP timestamp
-in RTP Sender Reports (SR) ([RFC3550] section 6.4.1); if this is not possible,
-the "estimated capture clock offset" MUST be used to indicate the offset between
+in RTP Sender Reports (SR) ([RFC3550] section 6.4.1), and indicate this by setting
+the "estimated capture clock offset" to zero; if this is not possible,
+the "estimated capture clock offset" MUST indicate the offset between
 the clock used for the capture timestamp and the clock used for RTP Sender Reports.
 
 
@@ -213,7 +217,6 @@ Note that this method is sensitive to a number of issues:
 
 - Clock drift means that you have to continuously monitor and update the offset
 - RTT variance will cause variation in offset; a smoothed value should be used
-- Before an RTT estimate is available, some heuristic number is needed
 
 This document is not normative about how the NTP clock offset is estimated.
 
