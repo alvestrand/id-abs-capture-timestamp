@@ -201,12 +201,13 @@ the most prominent CSRC as the first CSRC in a packet's CSRC list.
 
 The NTP clock offset can be calculated from an SR packet in the following way:
 
-- Take the arrival time of an SR packet, in the receiver's NTP clock
-- Subtract the NTP timestamp from the SR packet
+- Take the NTP timestamp from the SR packet
+- Subtract the arrival time of the SR packet, in the receiver's NTP clock
 - Add half the estimated RTT between the sender and the receiver
 
 The resulting number should be a reasonable approximation of the offset between the
-two clocks.
+two clocks, with positive numbers indicating that the sender's clock is running ahead,
+and negative numbers indicate that the sender's clock is running behind.
 
 
 #### Timestamp interpolation
