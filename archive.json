@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-03T00:14:15.068481+00:00",
+  "timestamp": "2024-10-06T00:15:35.830210+00:00",
   "repo": "alvestrand/id-abs-capture-timestamp",
   "labels": [
     {
@@ -50,5 +50,34 @@
     }
   ],
   "issues": [],
-  "pulls": []
+  "pulls": [
+    {
+      "number": 1,
+      "id": "PR_kwDOM2BX7c59fY5n",
+      "title": "Fix a couple typos",
+      "url": "https://github.com/alvestrand/id-abs-capture-timestamp/pull/1",
+      "state": "MERGED",
+      "author": "Orphis",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "`travelled` is British English while `traveled` is US English. As the rest of the document seems to be conforming to US English, it should be updated.",
+      "createdAt": "2024-10-03T11:49:11Z",
+      "updatedAt": "2024-10-03T11:52:53Z",
+      "baseRepository": "alvestrand/id-abs-capture-timestamp",
+      "baseRefName": "main",
+      "baseRefOid": "df96ba28f0405038ecc730cad95d57264d8197f1",
+      "headRepository": "Orphis/id-abs-capture-timestamp",
+      "headRefName": "patch-1",
+      "headRefOid": "b5d90deec8409d38a236e3676546d2df9623e71f",
+      "closedAt": "2024-10-03T11:52:53Z",
+      "mergedAt": "2024-10-03T11:52:53Z",
+      "mergedBy": "alvestrand",
+      "mergeCommit": {
+        "oid": "2635eb3599a6b4fb5650d9025c384f9092be1299"
+      },
+      "comments": [],
+      "reviews": []
+    }
+  ]
 }
