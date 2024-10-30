@@ -2,10 +2,10 @@
 
 This is the working area for the individual Internet-Draft, "Absolute Capture Timestamp RTP header extension".
 
-* [Editor's Copy](https://alvestrand.github.io/id-abs-capture-timestamp/#go.draft-alvestrand-avtcore-abs-capture-timestamp.html)
-* [Datatracker Page](https://datatracker.ietf.org/doc/draft-alvestrand-avtcore-abs-capture-timestamp)
-* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-alvestrand-avtcore-abs-capture-timestamp)
-* [Compare Editor's Copy to Individual Draft](https://alvestrand.github.io/id-abs-capture-timestamp/#go.draft-alvestrand-avtcore-abs-capture-timestamp.diff)
+* [Editor's Copy](https://alvestrand.github.io/id-abs-capture-timestamp/#go.draft-alvestrand-avtcore-abs-capture-time.html)
+* [Datatracker Page](https://datatracker.ietf.org/doc/draft-alvestrand-avtcore-abs-capture-time)
+* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-alvestrand-avtcore-abs-capture-time)
+* [Compare Editor's Copy to Individual Draft](https://alvestrand.github.io/id-abs-capture-timestamp/#go.draft-alvestrand-avtcore-abs-capture-time.diff)
 
 
 ## Contributing
