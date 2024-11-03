@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-31T00:14:38.383668+00:00",
+  "timestamp": "2024-11-03T00:15:56.312733+00:00",
   "repo": "alvestrand/id-abs-capture-timestamp",
   "labels": [
     {
@@ -49,7 +49,32 @@
       "color": "ffffff"
     }
   ],
-  "issues": [],
+  "issues": [
+    {
+      "number": 2,
+      "id": "I_kwDOM2BX7c6coMLq",
+      "title": "RTP topologies",
+      "url": "https://github.com/alvestrand/id-abs-capture-timestamp/issues/2",
+      "state": "OPEN",
+      "author": "aboba",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Section 1\r\n\r\n\"However, when multiple hops and multiple systems are involved, this task becomes more difficult; in particular, when one desires to synchronize media from multiple sources with independent clocks, where the media may have traveled over multiple network hops between the source and destination.This memo describes one mechanism for providing more information to make such synchronization possible.\"\r\n\r\n[BA]  Is the sole use case for this document \"lip sync\" from a single source?  Or are other use cases possible too (e.g. synchronized concert)?\r\n\r\nAs written, this section could be interpreted to apply to a wide range of RTP topologies described in RFC 7667. Since RTCP termination is mentioned in Section 3, this does not appear to be the intent.  I'd suggest adding a paragraph describing the RTP topologies to which this specification applies (e.g. Section 3.6 and 3.7 of RFC 7667)\r\n\r\nSection 3.1.2.1\r\n\r\n\" Absolute capture timestamp is the NTP timestamp of when the first frame in a packet was originally captured. This timestamp MUST be based on the same clock as the clock used to generate NTP timestamps for RTCP sender reports on the capture system.\"\r\n\r\n[BA] Does this imply that the RTCP SR NTP timestamp from the capturing system is placed in this field?\r\n\r\nSection 3.1.2.2\r\n\r\n   Estimated capture clock offset is the sender's estimate of the offset\r\n   between its own NTP clock and the capture system's NTP clock.  The\r\n   sender is here defined as the system that owns the NTP clock used to\r\n   generate the NTP timestamps for the RTCP sender reports on this\r\n   stream.  The sender system is typically either the capture system or\r\n   a mixer.\r\n\r\n[BA] In an RTCP-terminating topology wouldn't the mixer/SFM be the sender?  In what topology would the capture system be the sender?\r\n\r\nSection 3.1.3.2\r\n\r\n   An intermediate system (e.g. mixer) MAY adjust these timestamps as\r\n   needed.  It MAY also choose to rewrite the timestamps completely,\r\n   using its own NTP clock as reference clock, if it wants to present\r\n   itself as a capture system for A/V-sync purposes.\r\n\r\n[BA] Wouldn't this behavior be governed by the topology? For example, an RTCP-terminating middle box uses its own NTP clock, but presumably a translator would not. ",
+      "createdAt": "2024-10-31T20:38:02Z",
+      "updatedAt": "2024-10-31T21:32:18Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "alvestrand",
+          "authorAssociation": "OWNER",
+          "body": "> Section 1\r\n> \r\n> \"However, when multiple hops and multiple systems are involved, this task becomes more difficult; in particular, when one desires to synchronize media from multiple sources with independent clocks, where the media may have traveled over multiple network hops between the source and destination.This memo describes one mechanism for providing more information to make such synchronization possible.\"\r\n> \r\n> [BA] Is the sole use case for this document \"lip sync\" from a single source? Or are other use cases possible too (e.g. synchronized concert)?\r\n\r\nIt's been envisaged for synchronizing audio and video from multiple independent sources, for instance from multiple microphones on independent systems in the same room.\r\n\r\nThe other prominent use case is statistics on end-to-end delay; for this use case, the fact that the estimates will be wrong some of the time doesn't matter as long as they're mostly correct most of the time.\r\n\r\n> \r\n> As written, this section could be interpreted to apply to a wide range of RTP topologies described in RFC 7667. Since RTCP termination is mentioned in Section 3, this does not appear to be the intent. I'd suggest adding a paragraph describing the RTP topologies to which this specification applies (e.g. Section 3.6 and 3.7 of RFC 7667)\r\n\r\nThe main scenario supported is an RTP-terminating mixer (3.6, 3.9).\r\nI'll have to scratch my head a bit about what will happen in other scenarios.\r\n\r\n> Section 3.1.2.1\r\n> \r\n> \" Absolute capture timestamp is the NTP timestamp of when the first frame in a packet was originally captured. This timestamp MUST be based on the same clock as the clock used to generate NTP timestamps for RTCP sender reports on the capture system.\"\r\n> \r\n> [BA] Does this imply that the RTCP SR NTP timestamp from the capturing system is placed in this field?\r\n\r\nNo. If they originate from the same clock, the offset field from the originating system will be zero.\r\nHowever, the RTCP SR NTP timestamp is produced when the RTCP SR is sent, not when the frame is captured.\r\n\r\n> \r\n> Section 3.1.2.2\r\n> \r\n> Estimated capture clock offset is the sender's estimate of the offset between its own NTP clock and the capture system's NTP clock. The sender is here defined as the system that owns the NTP clock used to generate the NTP timestamps for the RTCP sender reports on this stream. The sender system is typically either the capture system or a mixer.\r\n> \r\n> [BA] In an RTCP-terminating topology wouldn't the mixer/SFM be the sender? In what topology would the capture system be the sender?\r\n\r\nPoint-to-point and point-to-multipoint (RFC  7667 3.1, 3.2, 3.4, 3.7) are the obvious ones. As long as the delay estimation algorithm runs between the capture system and the consumer system. In all RTCP-terminating topologies, the middle box is the sender.\r\n> \r\n> Section 3.1.3.2\r\n> \r\n> An intermediate system (e.g. mixer) MAY adjust these timestamps as needed. It MAY also choose to rewrite the timestamps completely, using its own NTP clock as reference clock, if it wants to present itself as a capture system for A/V-sync purposes.\r\n> \r\n> [BA] Wouldn't this behavior be governed by the topology? For example, an RTCP-terminating middle box uses its own NTP clock, but presumably a translator would not.\r\n\r\nRight. See above. Would be good to say \"An intermediate RTCP-terminating system\" instead of just \"an intermediate system\", for clarity.\r\n",
+          "createdAt": "2024-10-31T21:32:18Z",
+          "updatedAt": "2024-10-31T21:32:18Z"
+        }
+      ]
+    }
+  ],
   "pulls": [
     {
       "number": 1,
