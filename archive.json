@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-05T00:14:09.293811+00:00",
+  "timestamp": "2024-11-07T00:14:22.269233+00:00",
   "repo": "alvestrand/id-abs-capture-timestamp",
   "labels": [
     {
@@ -86,9 +86,17 @@
       "labels": [],
       "body": "Raised by Jonathan Lennox:\r\n\r\nDraft should describe how to deal with the NTP timestamp overflow in 2036.\r\n\"Interpret as closest time to current time\" is probably Good Enough.\r\n",
       "createdAt": "2024-11-04T09:41:24Z",
-      "updatedAt": "2024-11-04T09:41:24Z",
+      "updatedAt": "2024-11-05T10:33:07Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "JonathanLennox",
+          "authorAssociation": "NONE",
+          "body": "RFC 5905 [NTPv4] Section 4 gives the formulas this, computing the \"era\" from the current time, and then evaluating an NTP timestamp in the context of the era.",
+          "createdAt": "2024-11-05T10:33:05Z",
+          "updatedAt": "2024-11-05T10:33:05Z"
+        }
+      ]
     },
     {
       "number": 4,
@@ -103,6 +111,22 @@
       "body": "Raised by Jonathan Lennox:\r\n\r\nStored media doesn't have an obvious candidate for \"the capture time\". It's definitely not \"now\".\r\n\r\nSuggestion is to pick a number for the start of the media, record the offset between the local clock and that into the offset, and increase the \"capture\" timestamp by the clock recovered from the media.\r\n\r\nZero may be a fine number.\r\n",
       "createdAt": "2024-11-04T09:43:35Z",
       "updatedAt": "2024-11-04T09:43:35Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 5,
+      "id": "I_kwDOM2BX7c6dD-Ld",
+      "title": "Describe how the capture time offset is consumed",
+      "url": "https://github.com/alvestrand/id-abs-capture-timestamp/issues/5",
+      "state": "OPEN",
+      "author": "JonathanLennox",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "There's a lot of confusion about the capture time offset field, so it'd be useful to describe (at a high level) some examples of code that uses it, and explains why the plain capture time isn't sufficient.",
+      "createdAt": "2024-11-05T10:35:22Z",
+      "updatedAt": "2024-11-05T10:35:22Z",
       "closedAt": null,
       "comments": []
     }
