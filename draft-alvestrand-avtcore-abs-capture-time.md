@@ -60,7 +60,7 @@ are involved, this task becomes more difficult; in particular, when one desires 
 media from multiple sources with independent clocks, where the media may have traveled over
 multiple network hops between the source and destination.
 
-This memo describes one mechanism for providing more information to make such synchronization
+This memo describes one mechanism for providing information to make such synchronization
 possible.
 
 
@@ -72,9 +72,18 @@ possible.
 
 The Absolute Capture Time extension is used to stamp RTP packets with a NTP
 timestamp showing when the first audio or video frame in a packet was originally
-captured. The intent of this extension is to provide a way to accomplish
+captured.
+
+Together with a round-trip-time estimate at the last hop, this extension allows a receiver
+to estimate the offset between its own clock and the capturer's clock, thus providing
+a way to translate the capture timestamp into a time in its own clock.
+
+One usage of this functionality is to provide a way to accomplish
 audio-to-video synchronization when RTCP-terminating intermediate systems (e.g.
 mixers) are involved.
+
+Another usage is to provide statistics on sender-to-recipient delay in applications with
+multiple RTP hops without requiring clocks to be synchronized.
 
 **Name:**
 "Absolute Capture Time"; "RTP Header Extension for Absolute Capture Time"
