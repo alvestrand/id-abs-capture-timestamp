@@ -68,6 +68,17 @@ possible.
 
 {::boilerplate bcp14-tagged}
 
+# Applicability
+
+In the terminology of [RFC7667], the applicable scenarios are those where RTP is terminated
+at an intermediate system: Selective Forwarding Middlebox (3.7) and Point to Multipoint using
+RTCP-terminating MCU (3.9)
+
+Other scenarios such as the Media-Switching Mixer (3.6.2)  may be applicable if RTP header rewriting
+is applied, so that per-hop information is isolated to the hop it is destined for
+
+Multicast scenarios are out of scope.
+
 # Absolute Capture Time
 
 The Absolute Capture Time extension is used to stamp RTP packets with a NTP
