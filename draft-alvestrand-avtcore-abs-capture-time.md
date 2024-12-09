@@ -238,6 +238,16 @@ clock drift. This is not always true. Senders that detect "jumps" between its
 NTP and RTP clock mappings SHOULD send `abs-capture-time` with the first RTP
 packet after such a thing happening.
 
+# Year 2036 considerations
+
+[RFC5905] section 6 describes how the 32-bit unsigned seconds field should be
+compared to a system clock, explaining how comparison of times works correctly when the
+32-bit unsigned seconds field wraps in 2036 (the beginning of NTP era 1) provided
+proper two's complement arithmetic is used for subtractions.
+
+For the purposes of this memo, it is sufficient to note that a timestamp represents
+the closest timestamp in a relevant era.
+
 # Security Considerations
 
 This extension carries information that may allow an attacker to identify different
