@@ -172,6 +172,15 @@ the "estimated capture clock offset" to zero; if this is not possible,
 the "estimated capture clock offset" MUST indicate the offset between
 the clock used for the capture timestamp and the clock used for RTP Sender Reports.
 
+When the media is not captured in real time, such as when sending stored media, the
+sender can choose any reasonable start time; in that case, the offset between the
+chosen start time and the NTP clock of the sender system MUST be encoded into the
+"offset" value of the extension.
+
+The "capture" timestamp should then advance according to the natural progression of
+the media; if this deviates from the NTP clock of the sender system, such as on a
+reader stall, this change SHOULD be reflected in the "offset" value.
+
 
 #### Intermediate systems
 
