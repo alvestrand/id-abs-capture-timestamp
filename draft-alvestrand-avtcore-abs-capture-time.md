@@ -32,9 +32,11 @@ author:
 normative:
   RFC2119:
   RFC3550:
+  RFC5905:
   RFC8174:
 
 informative:
+  RFC7667:
 
 
 --- abstract
@@ -70,17 +72,6 @@ possible.
 
 # Applicability
 
-In the terminology of [RFC7667], the applicable scenarios are those where RTP is terminated
-at an intermediate system: Selective Forwarding Middlebox (3.7) and Point to Multipoint using
-RTCP-terminating MCU (3.9)
-
-Other scenarios such as the Media-Switching Mixer (3.6.2)  may be applicable if RTP header rewriting
-is applied, so that per-hop information is isolated to the hop it is destined for
-
-Multicast scenarios are out of scope.
-
-# Absolute Capture Time
-
 The Absolute Capture Time extension is used to stamp RTP packets with a NTP
 timestamp showing when the first audio or video frame in a packet was originally
 captured.
@@ -95,6 +86,18 @@ mixers) are involved.
 
 Another usage is to provide statistics on sender-to-recipient delay in applications with
 multiple RTP hops without requiring clocks to be synchronized.
+
+In the terminology of [RFC7667], the applicable scenarios are those where RTP is terminated
+at an intermediate system: Selective Forwarding Middlebox (3.7) and Point to Multipoint using
+RTCP-terminating MCU (3.9)
+
+Other scenarios such as the Media-Switching Mixer (3.6.2)  may be applicable if RTP header rewriting
+is applied, so that per-hop information is isolated to the hop it is destined for
+
+Multicast scenarios are out of scope.
+
+# Absolute Capture Time
+
 
 **Name:**
 "Absolute Capture Time"; "RTP Header Extension for Absolute Capture Time"
@@ -178,9 +181,9 @@ sender system's NTP clock, to also estimate the capture system's NTP clock:
 If the estimated capture clock offset is not present (short format), it means
 that the sending system does not have enough data to compute a clock offset.
 
-### Further details
+## Details of operation
 
-#### Capture system
+### Capture system
 
 The capture system generates the timestamp as close as possible to the true
 capture time. This may involve subtracting known delays in the capture pipeline
@@ -202,7 +205,7 @@ the media; if this deviates from the NTP clock of the sender system, such as on 
 reader stall, this change SHOULD be reflected in the "offset" value.
 
 
-#### Intermediate systems
+### Intermediate systems
 
 An intermediate system MAY compute the outgoing capture clock offset as follows:
 
@@ -218,7 +221,7 @@ MAY also choose to rewrite the timestamps completely, using its own NTP clock as
 reference clock, if it wants to present itself as a capture system for A/V-sync
 purposes.
 
-#### End systems
+### End systems
 
 A receiver can use the same algorithm as intermediate systems in order to compute
 the approximate time in the receiver's NTP clock at which the packet was generated.
@@ -230,7 +233,7 @@ it belongs to the capture system. If the CSRC list is empty, then the receiver
 MUST treat the SSRC as if it belongs to the capture system. Mixers SHOULD put
 the most prominent CSRC as the first CSRC in a packet's CSRC list.
 
-#### Estimating the NTP clock offset {#offset}
+## Estimating the NTP clock offset {#offset}
 
 The NTP clock offset can be calculated from an SR packet in the following way:
 
@@ -246,10 +249,11 @@ Note that this method is sensitive to a number of issues:
 
 - Clock drift means that you have to continuously monitor and update the offset
 - RTT variance will cause variation in offset; a smoothed value should be used
+- Asymmetric delays, if present, will cause biased estimates
 
 This document is not normative about how the NTP clock offset is estimated.
 
-#### Timestamp interpolation
+## Timestamp interpolation
 
 A sender SHOULD save bandwidth by not sending `abs-capture-time` with every
 RTP packet. It SHOULD still send them at regular intervals (e.g. every second)
@@ -267,11 +271,11 @@ clock drift. This is not always true. Senders that detect "jumps" between its
 NTP and RTP clock mappings SHOULD send `abs-capture-time` with the first RTP
 packet after such a thing happening.
 
-# Year 2036 considerations
+## Year 2036 considerations
 
 [RFC5905] section 6 describes how the 32-bit unsigned seconds field should be
 compared to a system clock, explaining how comparison of times works correctly when the
-32-bit unsigned seconds field wraps in 2036 (the beginning of NTP era 1) provided
+64-bit unsigned seconds field wraps in 2036 (the beginning of NTP era 1) provided
 proper two's complement arithmetic is used for subtractions.
 
 For the purposes of this memo, it is sufficient to note that a timestamp represents
@@ -289,7 +293,8 @@ is exposed.
 If the WG decides that this extension should be registered as a standardized
 extension, IANA is requested to perform the appropriate registration.
 
-If the WG decides that this is a private extension, the URL xxxxx is used to
+If the WG decides that this is a private extension, the URL
+http://www.webrtc.org/experiments/rtp-hdrext/abs-capture-time is used to
 identify the extension.
 
 
@@ -299,3 +304,5 @@ identify the extension.
 {:numbered="false"}
 
 Chen Xing, for writing the original version of this specification.
+
+Bernard Aboba and Jonathan Lennox, for helpful comments.
