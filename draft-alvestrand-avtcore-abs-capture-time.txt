@@ -4,8 +4,8 @@
 
 Audio/Video Transport Core Maintenance                     H. Alvestrand
 Internet-Draft                                                    Google
-Intended status: Informational                            3 October 2024
-Expires: 6 April 2025
+Intended status: Informational                          10 December 2024
+Expires: 13 June 2025
 
 
             Absolute Capture Timestamp RTP header extension
@@ -52,7 +52,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 April 2025.
+   This Internet-Draft will expire on 13 June 2025.
 
 Copyright Notice
 
@@ -222,6 +222,17 @@ Table of Contents
    offset" to zero; if this is not possible, the "estimated capture
    clock offset" MUST indicate the offset between the clock used for the
    capture timestamp and the clock used for RTP Sender Reports.
+
+   When the media is not captured in real time, such as when sending
+   stored media, the sender can choose any reasonable start time; in
+   that case, the offset between the chosen start time and the NTP clock
+   of the sender system MUST be encoded into the "offset" value of the
+   extension.
+
+   The "capture" timestamp should then advance according to the natural
+   progression of the media; if this deviates from the NTP clock of the
+   sender system, such as on a reader stall, this change SHOULD be
+   reflected in the "offset" value.
 
 3.1.3.2.  Intermediate systems
 
